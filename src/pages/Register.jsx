@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import ValidationForRegister from "../components/ValidationForRegister";
+import toast from "react-hot-toast";
 
 const Register = () => {
     const {createUser} = useContext(AuthContext);
@@ -14,10 +16,18 @@ const Register = () => {
         const password = form.get('password');
         console.log(name, photo, email, password);
 
+        // password validation
+        const passwordValidation = ValidationForRegister(password);
+        if (passwordValidation) {
+            toast.error(passwordValidation);
+            return;
+          }
+
         // create user 
     createUser(email, password)
     .then(result => {
         console.log(result.user);
+        toast.success('User created successfully.');
     })
     .catch(error =>{
         console.log(error);

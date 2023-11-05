@@ -1,12 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
     const { loginUser, googleLogin } = useContext(AuthContext);
+    const [loginError, setLoginError] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -15,6 +17,8 @@ const Login = () => {
         const password = form.get("password");
         console.log(email, password);
 
+        setLoginError(null);
+        
         // for login
         loginUser(email, password)
             .then((result) => {
@@ -24,6 +28,7 @@ const Login = () => {
             })
             .catch((error) => {
                 console.log(error);
+                setLoginError("Invalid email or password.");
             });
     };
 
@@ -48,6 +53,11 @@ const Login = () => {
             <div className="bg-gray-100 flex items-center justify-center h-screen">
                 <div className="bg-white p-8 rounded shadow-md w-96">
                     <h1 className="text-2xl font-semibold mb-4">Login</h1>
+                    {loginError && (
+                        <div className="mb-4 text-red-600 font-semibold">
+                        {loginError}
+                        </div>
+                    )}
                     <form onSubmit={handleLogin}>
                         <div className="mb-4">
                             <label htmlFor="email" className="block text-gray-600">
@@ -82,12 +92,16 @@ const Login = () => {
                             </button>
                         </div>
                     </form>
-                    <button
-                        onClick={handleGoogleLogin}
-                        className="btn my-3 btn-outline w-full hover:border-white"
-                    >
-                        <FaGoogle /> Login with Google
-                    </button>
+                    <div className="text-center">
+                        <button
+                            onClick={handleGoogleLogin}
+                            className="bg-blue-500 text-white btn my-3  hover:bg-blue-600"
+                        >
+
+                            <FaGoogle /> Login with Google
+                        </button>
+                    </div>
+
                     <p className="mt-4 text-center">
                         Do not have an account?{" "}
                         <button
