@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const {createUser} = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleRegister = e =>{
         e.preventDefault();
         const form = new FormData(e.currentTarget);
@@ -12,7 +14,7 @@ const Register = () => {
         const password = form.get('password');
         console.log(name, photo, email, password);
 
-            // create user 
+        // create user 
     createUser(email, password)
     .then(result => {
         console.log(result.user);
@@ -21,6 +23,10 @@ const Register = () => {
         console.log(error);
     })
     }
+        // login toggle
+    const handleLoginToggle = () => {
+        navigate('/login');
+      };
 
     return (
         <>
@@ -85,6 +91,16 @@ const Register = () => {
                         </button>
                     </div>
                     </form>
+                    <p className="mt-4 text-center">
+                        Already have an account?{' '}
+                        <button
+                        className="hover:underline"
+                        type="button"
+                        onClick={handleLoginToggle}
+                        >
+                        Login
+                        </button>
+                    </p>
                 </div>
             </div>
         </>
