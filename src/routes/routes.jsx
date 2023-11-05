@@ -7,6 +7,7 @@ import CreateAssignment from "../pages/CreateAssignment";
 import MyAssignment from "../pages/MyAssignment";
 import SubmittedAssignment from "../pages/SubmittedAssignment";
 import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const allRoutes = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const allRoutes = createBrowserRouter([
             {
                 path:'/login',
                 element: <Login></Login>,
+            },
+            {
+                path:'/register',
+                element: <Register></Register>,
             },
 
 
