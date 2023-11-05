@@ -17,11 +17,8 @@ const CreateAssignment = () => {
         const difficulty = form.get('difficulty');
         const thumbnailUrl = form.get('thumbnailUrl');
 
-        // Ensure dueDate is in the desired format, for example:
-        const formattedDueDate = dueDate ? dueDate.toISOString() : null;
-
-        // Fetch and handle the assignment creation as needed for your backend
-        // For example, you can send a POST request with the form data
+        // Ensure dueDate is in the desired format for the server
+        const formattedDueDate = dueDate ? dueDate.toISOString().split('T')[0] : null;
 
         fetch('http://localhost:5000/create-assignment', {
             method: 'POST',
@@ -105,6 +102,7 @@ const CreateAssignment = () => {
                     <DatePicker
                         selected={dueDate}
                         onChange={(date) => setDueDate(date)}
+                        dateFormat="yyyy-MM-dd"
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                     />
                 </div>
