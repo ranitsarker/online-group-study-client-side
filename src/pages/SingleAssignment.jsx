@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const SingleAssignment = () => {
     const { id } = useParams();
@@ -31,7 +31,9 @@ const SingleAssignment = () => {
                     <p className="text-gray-700 mb-2">Due Date: {eachAssignment.dueDate}</p>
                     <p className="text-gray-700 mb-2">Created By: {eachAssignment.createdBy}</p>
                     <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
-                        Take Assignment
+                        <Link to="/assignment-submission" className="text-white">
+                            Take Assignment
+                        </Link>
                     </button>
                 </div>
             </div>

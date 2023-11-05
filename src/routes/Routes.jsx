@@ -5,12 +5,12 @@ import MainLayout from "../layout/MainLayout";
 import AllAssignments from "../pages/AllAssignments";
 import CreateAssignment from "../pages/CreateAssignment";
 import MyAssignment from "../pages/MyAssignment";
-import SubmittedAssignment from "../pages/SubmittedAssignment";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import SingleAssignment from "../pages/SingleAssignment";
 import UpdateAssignment from "../pages/UpdateAssignment";
 import PrivateRoutes from "./PrivateRoutes";
+import AssignmentSubmission from "../pages/AssignmentSubmission";
 
 const allRoutes = createBrowserRouter([
     {
@@ -45,8 +45,8 @@ const allRoutes = createBrowserRouter([
                 element: <MyAssignment></MyAssignment>,
             },
             {
-                path:'/submitted-assignment',
-                element: <SubmittedAssignment></SubmittedAssignment>,
+                path:'/assignment-submission',
+                element: <AssignmentSubmission></AssignmentSubmission>,
             },
             {
                 path:'/login',

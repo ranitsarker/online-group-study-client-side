@@ -22,7 +22,7 @@ const Navbar = () => {
         <>
         <li><NavLink to='/create-assignment'>Create Assignment</NavLink></li>
         <li><NavLink to='/my-assignment'>My Assignment</NavLink></li>
-        <li><NavLink to='/submitted-assignment'>Submitted Assignment</NavLink></li>
+        <li><NavLink to='/assignment-submission'>Assignment Submission</NavLink></li>
         <li><button onClick={handleLogout}>Logout</button></li>
         </>
         :
