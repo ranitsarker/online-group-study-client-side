@@ -10,6 +10,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import SingleAssignment from "../pages/SingleAssignment";
 import UpdateAssignment from "../pages/UpdateAssignment";
+import PrivateRoutes from "./PrivateRoutes";
 
 const allRoutes = createBrowserRouter([
     {
@@ -27,16 +28,16 @@ const allRoutes = createBrowserRouter([
             },
             {
                 path:'/assignment/:id',
-                element: <SingleAssignment></SingleAssignment>,
+                element: <PrivateRoutes><SingleAssignment></SingleAssignment></PrivateRoutes>,
             },
 
             {
                 path:'/create-assignment',
-                element: <CreateAssignment></CreateAssignment>,
+                element: <PrivateRoutes><CreateAssignment></CreateAssignment></PrivateRoutes>,
             },
             {
                 path: '/update-assignment/:id',
-                element: <UpdateAssignment></UpdateAssignment>,
+                element: <PrivateRoutes><UpdateAssignment></UpdateAssignment></PrivateRoutes>,
                 loader: ({params}) => fetch(`http://localhost:5000/update-assignment/${params.id}`),
             },
             {
