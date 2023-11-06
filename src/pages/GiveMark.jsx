@@ -21,6 +21,47 @@ const GiveMark = () => {
       });
   }, [assignmentId]);
 
+  const handleSubmit = async () => {
+    // Prepare the data for the server to update the assignment status
+    const statusData = {
+      assignmentTitle: assignmentDetails.assignmentTitle,
+      userEmail: assignmentDetails.userEmail,
+      marks,
+      feedback,
+      status: 'completed',
+    };
+  
+    try {
+      // Send a POST request to update the assignment status
+      const statusResponse = await fetch('http://localhost:5000/complete-assignment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(statusData),
+      });
+  
+      if (statusResponse.status === 201) {
+        console.log('Assignment status updated successfully');
+  
+        // Send a request to remove the assignment from the 'submitted' collection
+        const removeResponse = await fetch(`http://localhost:5000/remove-submitted-assignment/${assignmentId}`, {
+          method: 'DELETE',
+        });
+  
+        if (removeResponse.status === 200) {
+          console.log('Assignment removed from submitted collection');
+        } else {
+          console.error('Error removing assignment from submitted collection');
+        }
+      } else {
+        console.error('Error updating assignment status');
+      }
+    } catch (error) {
+      console.error('Error updating assignment status:', error);
+    }
+  };
+  
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="max-w-full p-6 bg-white rounded-lg shadow-md">
@@ -57,7 +98,11 @@ const GiveMark = () => {
             />
           </div>
           <div className="mt-6">
-            <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+          <button
+              type="button" // Use type="button to prevent form submission
+              onClick={handleSubmit} // Call the function to handle the submission
+              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+            >
               Submit
             </button>
           </div>

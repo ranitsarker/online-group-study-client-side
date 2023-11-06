@@ -58,6 +58,7 @@ const CreateAssignment = () => {
                         id="title"
                         name="title"
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        required
                     />
                 </div>
                 <div>
@@ -68,6 +69,7 @@ const CreateAssignment = () => {
                         id="description"
                         name="description"
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        required
                     ></textarea>
                 </div>
                 <div>
@@ -79,6 +81,7 @@ const CreateAssignment = () => {
                         id="marks"
                         name="marks"
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        required
                     />
                 </div>
                 <div>
@@ -89,6 +92,7 @@ const CreateAssignment = () => {
                         id="difficulty"
                         name="difficulty"
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        required
                     >
                         <option value="easy">Easy</option>
                         <option value="medium">Medium</option>
@@ -104,6 +108,7 @@ const CreateAssignment = () => {
                         onChange={(date) => setDueDate(date)}
                         dateFormat="yyyy-MM-dd"
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        required
                     />
                 </div>
                 <div>
@@ -115,6 +120,7 @@ const CreateAssignment = () => {
                         id="thumbnailUrl"
                         name="thumbnailUrl"
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        required
                     />
                 </div>
                 <button
