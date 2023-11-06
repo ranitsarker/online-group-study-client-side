@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-export const AssignmentContext = createContext();
+const AssignmentContext = createContext();
 
-export function AssignmentProvider({ children }) {
+export const AssignmentProvider = ({ children }) => {
   const [assignmentDetails, setAssignmentDetails] = useState({ title: '', marks: '' });
 
   return (
@@ -11,7 +10,8 @@ export function AssignmentProvider({ children }) {
       {children}
     </AssignmentContext.Provider>
   );
-}
-AssignmentProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+};
+
+export const useAssignment = () => {
+  return useContext(AssignmentContext);
 };
