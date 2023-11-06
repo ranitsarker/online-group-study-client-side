@@ -1,12 +1,16 @@
-import { useState } from 'react';
-import { useContext } from 'react';
-import { AuthContext } from '../providers/AuthProvider';
+import { useState, useContext } from 'react';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../providers/AuthProvider';
+import { useLocation } from 'react-router-dom';
 
 const AssignmentSubmission = () => {
     const [pdfLink, setPdfLink] = useState('');
     const [quickNote, setQuickNote] = useState('');
     const { user } = useContext(AuthContext);
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const assignmentTitle = query.get('title');
+    const assignmentMarks = query.get('marks');
 
     const handlePdfLinkChange = (e) => {
         setPdfLink(e.target.value);
@@ -20,19 +24,21 @@ const AssignmentSubmission = () => {
         e.preventDefault();
 
         if (!pdfLink || !quickNote) {
-            toast.error('Please fill in all fields');
+            toast.error('Please fill in all required fields');
             return;
         }
 
-        // Create an object with the form data and user's email
+        // Create an object with the form data including user's email, assignment title, and assignment marks
         const submissionData = {
             pdfLink,
             quickNote,
             userEmail: user.email,
+            assignmentTitle,
+            assignmentMarks
         };
-
+        
         // Send the submissionData to your server
-        fetch('http://localhost:5000/submit-assignment', {
+        fetch('http://localhost:5000/assignment-submission', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -82,7 +88,7 @@ const AssignmentSubmission = () => {
                         className="w-full p-2 border rounded-md focus:ring focus:ring-blue-300 h-32"
                     ></textarea>
                 </div>
-                <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+                <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover-bg-blue-600">
                     Submit Assignment
                 </button>
             </form>
