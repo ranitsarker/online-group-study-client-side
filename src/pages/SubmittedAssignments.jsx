@@ -22,29 +22,50 @@ const SubmittedAssignments = () => {
 
   return (
     <div>
-      <h1>Submitted Assignments</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment Title</th>
-            <th>Marks</th>
-            <th>Examinee Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {assignments.map((assignment) => (
-            <tr key={assignment._id}>
-              <td>{assignment.assignmentTitle}</td>
-              <td>{assignment.assignmentMarks}</td>
-              <td>{assignment.examineeName}</td>
-              <td>
-                <button onClick={() => giveMark(assignment._id)}>Give Mark</button>
-              </td>
+      <h1 className="text-2xl font-semibold mb-4">Submitted Assignments</h1>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white rounded-lg">
+          <thead>
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Assignment Title
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Marks
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Examinee Name
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {assignments.map((assignment) => (
+              <tr key={assignment._id} className="odd:bg-gray-100">
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {assignment.assignmentTitle}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {assignment.assignmentMarks}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {assignment.userEmail}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <button
+                    onClick={() => giveMark(assignment._id)}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  >
+                    Give Mark
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

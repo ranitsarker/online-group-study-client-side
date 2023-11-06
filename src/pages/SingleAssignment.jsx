@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useAssignment } from "../providers/AssignmentProvider";
 
 const SingleAssignment = () => {
+    const { setAssignmentDetails } = useAssignment();
     const { id } = useParams();
     const [eachAssignment, setEachAssignment] = useState(null);
 
     useEffect(() => {
         fetch(`http://localhost:5000/assignment/${id}`)
             .then((res) => res.json())
-            .then((data) => setEachAssignment(data));
-    }, [id]);
+            .then((data) => {
+                setEachAssignment(data);
+                setAssignmentDetails({ title: data.title, marks: data.marks });
+            });
+    }, [id, setAssignmentDetails]);
 
     if (!eachAssignment) {
         return <p>Loading...</p>;
@@ -31,9 +36,7 @@ const SingleAssignment = () => {
                     <p className="text-gray-700 mb-2">Due Date: {eachAssignment.dueDate}</p>
                     <p className="text-gray-700 mb-2">Created By: {eachAssignment.createdBy}</p>
                     <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
-                        <Link to={`/assignment-submission?title=${eachAssignment.title}&marks=${eachAssignment.marks}`} className="text-white">
-                            Take Assignment
-                        </Link>
+                        <Link to="/assignment-submission" className="text-white">Take Assignment</Link>
                     </button>
                 </div>
             </div>
