@@ -47,11 +47,11 @@ const allRoutes = createBrowserRouter([
             },
             {
                 path:'/assignment-submission',
-                element: <AssignmentSubmission></AssignmentSubmission>,
+                element: <PrivateRoutes><AssignmentSubmission></AssignmentSubmission></PrivateRoutes>,
             },
             {
                 path:'/submitted-assignment',
-                element: <SubmittedAssignments></SubmittedAssignments>,
+                element: <PrivateRoutes><SubmittedAssignments></SubmittedAssignments></PrivateRoutes>,
             },
             {
                 path:'/login',

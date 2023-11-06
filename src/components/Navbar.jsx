@@ -24,6 +24,7 @@ const Navbar = () => {
         <li><NavLink to='/my-assignment'>My Assignment</NavLink></li>
         <li><NavLink to='/assignment-submission'>Assignment Submission</NavLink></li>
         <li><button onClick={handleLogout}>Logout</button></li>
+        <li>{user.email}</li>
         </>
         :
         <li><NavLink to='/login'>Login</NavLink></li>
