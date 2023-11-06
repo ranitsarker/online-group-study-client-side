@@ -23,7 +23,7 @@ const SubmittedAssignments = () => {
     }
   }, [user]);
 
-  // giving marks handler 
+  // Function to handle giving marks handler 
   const giveMark = (assignmentId) => {
     navigate(`/give-mark/${assignmentId}`);
   };
