@@ -1,9 +1,8 @@
-import { createContext, useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+import { createContext, useState } from 'react';
 
-// eslint-disable-next-line react/prop-types
-const AssignmentContext = createContext();
+export const AssignmentContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export function AssignmentProvider({ children }) {
   const [assignmentDetails, setAssignmentDetails] = useState({ title: '', marks: '' });
 
@@ -13,8 +12,6 @@ export function AssignmentProvider({ children }) {
     </AssignmentContext.Provider>
   );
 }
-
-// eslint-disable-next-line react/prop-types
-export function useAssignment() {
-  return useContext(AssignmentContext);
-}
+AssignmentProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

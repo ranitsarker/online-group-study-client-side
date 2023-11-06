@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import toast from 'react-hot-toast';
-import { useAssignment } from '../providers/AssignmentProvider'; 
 import { AuthContext } from '../providers/AuthProvider';
+import { useAssignment } from '../hooks/useAssignment';
 
 const AssignmentSubmission = () => {
     // my custom hook

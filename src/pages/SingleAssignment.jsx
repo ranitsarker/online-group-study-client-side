@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useAssignment } from "../providers/AssignmentProvider";
+import { useAssignment } from "../hooks/useAssignment";
 
 const SingleAssignment = () => {
     const { setAssignmentDetails } = useAssignment();
