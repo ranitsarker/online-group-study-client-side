@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../providers/AuthProvider';
+import toast from 'react-hot-toast';
 
 const AssignmentSubmission = () => {
     const [pdfLink, setPdfLink] = useState('');
     const [quickNote, setQuickNote] = useState('');
+    const { user } = useContext(AuthContext);
 
     const handlePdfLinkChange = (e) => {
         setPdfLink(e.target.value);
@@ -14,7 +18,39 @@ const AssignmentSubmission = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission here, you can send the pdfLink and quickNote to your server
+
+        if (!pdfLink || !quickNote) {
+            toast.error('Please fill in all fields');
+            return;
+        }
+
+        // Create an object with the form data and user's email
+        const submissionData = {
+            pdfLink,
+            quickNote,
+            userEmail: user.email,
+        };
+
+        // Send the submissionData to your server
+        fetch('http://localhost:5000/submit-assignment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submissionData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                toast.success('Assignment submitted successfully');
+                // Clear the form fields if needed
+                setPdfLink('');
+                setQuickNote('');
+            })
+            .catch((error) => {
+                toast.error('Failed to submit assignment');
+                console.error(error);
+            });
     };
 
     return (
