@@ -13,8 +13,19 @@ const AssignmentSubmission = () => {
   const [quickNote, setQuickNote] = useState('');
 
   const handlePdfLinkChange = (e) => {
-    setPdfLink(e.target.value);
+    const input = e.target.value;
+    
+    // Regular expression to check if the input is a valid Google Drive PDF link
+    const urlRegex = /^https:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/view(\?usp=sharing)?$/;
+    
+    if (urlRegex.test(input) || input.toLowerCase().endsWith('.pdf')) {
+      setPdfLink(input);
+    } else {
+      toast.error('Please enter a valid Google Drive PDF link or any online PDF link');
+    }
   };
+  
+  
 
   const handleQuickNoteChange = (e) => {
     setQuickNote(e.target.value);

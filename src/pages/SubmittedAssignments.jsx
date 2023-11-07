@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import PdfPreview from '../components/PdfPreview';
 
 const SubmittedAssignments = () => {
   const [assignments, setAssignments] = useState([]);
+  const [selectedPdf, setSelectedPdf] = useState({}); // Store selected PDF for each assignment
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -14,78 +16,67 @@ const SubmittedAssignments = () => {
         .then((response) => response.json())
         .then((data) => {
           setAssignments(data);
-          setIsLoading(false); 
+          setIsLoading(false);
         })
         .catch((error) => {
           console.error('Error fetching submitted assignments:', error);
-          setIsLoading(false); 
+          setIsLoading(false);
         });
     }
   }, [user]);
 
-  // Function to handle giving marks handler 
+  // Function to handle giving marks handler
   const giveMark = (assignmentId) => {
     navigate(`/give-mark/${assignmentId}`);
   };
 
+  // Function to handle opening and closing PDF preview for a specific assignment
+  const togglePdfPreview = (assignmentId, pdfLink) => {
+    if (selectedPdf[assignmentId] === pdfLink) {
+      setSelectedPdf({ ...selectedPdf, [assignmentId]: null }); // Close the preview
+    } else {
+      setSelectedPdf({ ...selectedPdf, [assignmentId]: pdfLink }); // Open the preview
+    }
+  };
+
   return (
-    <div>
-      <h1 className="text-2xl font-semibold mb-4">Submitted Assignments</h1>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : assignments.length === 0 ? (
-        <p>No assignments have been submitted yet.</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white rounded-lg">
-            <thead>
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Assignment Title
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Total Marks
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Examinee Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {assignments.map((assignment) => (
-                <tr key={assignment._id} className="odd:bg-gray-100">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {assignment.assignmentTitle}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {assignment.assignmentMarks}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {assignment.userEmail}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {assignment.status}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <button
-                      onClick={() => giveMark(assignment._id)}
-                      className="px-4 py-2 bg-blue-500 text-white rounded-md hover-bg-blue-600"
-                    >
-                      Give Mark
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+    <div className="bg-gray-100 min-h-screen py-10">
+      <div className="max-w-6xl mx-auto bg-white rounded-md p-4">
+        <h1 className="text-2xl font-semibold mb-4">Submitted Assignments</h1>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : assignments.length === 0 ? (
+          <p>No assignments are pending yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-4">
+            {assignments.map((assignment) => (
+              <div key={assignment._id} className="bg-white border p-4 rounded-md shadow">
+                <h2 className="text-lg font-semibold mb-2">{assignment.assignmentTitle}</h2>
+                <button
+                  onClick={() => togglePdfPreview(assignment._id, assignment.pdfLink)}
+                  className="bg-blue-500 text-white py-2 px-4 rounded-md hover-bg-blue-600"
+                >
+                  {selectedPdf[assignment._id] ? 'Close PDF' : 'Preview PDF'}
+                </button>
+                {selectedPdf[assignment._id] && (
+                  <div className="pdf-preview">
+                    <PdfPreview pdfLink={selectedPdf[assignment._id]} />
+                  </div>
+                )}
+                <p className="mt-2 text-gray-600">{assignment.assignmentMarks} Total Marks</p>
+                <p className="mt-2 text-gray-600">Submitted by {assignment.userEmail}</p>
+                <p className="mt-2 text-red-600 font-bold">Status: {assignment.status}</p>
+                <button
+                  onClick={() => giveMark(assignment._id)}
+                  className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover-bg-blue-600"
+                >
+                  Give Mark
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
