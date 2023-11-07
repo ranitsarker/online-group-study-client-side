@@ -50,8 +50,8 @@ const Login = () => {
 
     return (
         <>
-            <div className="bg-gray-100 flex items-center justify-center h-screen">
-                <div className="bg-white p-8 rounded shadow-md w-96">
+            <div className="bg-gray-100 flex items-center justify-center ">
+                <div className="bg-white p-8 rounded shadow-md w-96 m-4">
                     <h1 className="text-2xl font-semibold mb-4">Login</h1>
                     {loginError && (
                         <div className="mb-4 text-red-600 font-semibold">

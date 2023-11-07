@@ -4,7 +4,9 @@ import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
-    const {user, logOut} = useContext(AuthContext);
+    const {user, logOut, photoURL } = useContext(AuthContext);
+    console.log("User:", user);
+    console.log("Photo URL:", photoURL);
     // logout 
     const handleLogout = () => {
         logOut()
@@ -25,6 +27,8 @@ const Navbar = () => {
         <li><NavLink to='/my-assignment'>My Assignment</NavLink></li>
         <li><button onClick={handleLogout}>Logout</button></li>
         <li>{user.email}</li>
+        {user.photoURL && <img src={user.photoURL} alt="User Profile" className="w-8 h-8 rounded-full" />}
+
         </>
         :
         <li><NavLink to='/login'>Login</NavLink></li>
