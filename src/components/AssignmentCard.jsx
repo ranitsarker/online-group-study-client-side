@@ -79,7 +79,7 @@ AssignmentCard.propTypes = {
         createdBy: PropTypes.string.isRequired,
         _id: PropTypes.string.isRequired,
     }).isRequired,
-    onDeleteAssignment: PropTypes.func.isRequired, // Function to handle assignment deletion
+    onDelete: PropTypes.func.isRequired,
 };
 
 export default AssignmentCard;
