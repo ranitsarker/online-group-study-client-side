@@ -43,7 +43,7 @@ const UpdateAssignment = () => {
             .then(() => {
                 toast.success('Assignment updated successfully');
                 // Redirect to the view assignment page or any other page
-                navigate(`/assignment/${assignmentId}`);
+                navigate('/assignments');
             })
             .catch((error) => {
                 toast.error('An error occurred while updating the assignment');
