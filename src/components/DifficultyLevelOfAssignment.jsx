@@ -3,59 +3,60 @@ import AssignmentCard from '../components/AssignmentCard';
 
 const DifficultyLevelOfAssignment = () => {
     const [allAssignments, setAllAssignments] = useState([]);
-    const [selectedDifficulty, setSelectedDifficulty] = useState('all'); // 'all' to show all assignments
+    const [selectedDifficulty, setSelectedDifficulty] = useState('all');
+
+    const difficultyLabels = {
+        all: 'All',
+        easy: 'Easy',
+        medium: 'Medium',
+        hard: 'Hard',
+    };
 
     useEffect(() => {
-        // Fetch all assignments or filtered assignments based on selectedDifficulty
         fetch(`http://localhost:5000/all-assignment?difficulty=${selectedDifficulty}`)
             .then((res) => res.json())
             .then((data) => setAllAssignments(data));
     }, [selectedDifficulty]);
 
+    const handleDeleteAssignment = (assignmentId) => {
+        fetch(`http://localhost:5000/assignments/${assignmentId}`, {
+            method: 'DELETE',
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.message === 'Assignment deleted successfully') {
+                    setAllAssignments((prevAssignments) =>
+                        prevAssignments.filter((assignment) => assignment._id !== assignmentId)
+                    );
+                }
+            });
+    };
+
     return (
         <div>
-            {/* Difficulty Filter Buttons */}
             <div className="text-center my-4">
-                <button
-                    onClick={() => setSelectedDifficulty('all')}
-                    className={`${
-                        selectedDifficulty === 'all' ? 'bg-indigo-500 text-white' : 'bg-gray-300 text-gray-800'
-                    } py-2 px-4 mx-1 rounded-md hover:bg-indigo-600`}
-                >
-                    All
-                </button>
-                <button
-                    onClick={() => setSelectedDifficulty('easy')}
-                    className={`${
-                        selectedDifficulty === 'easy' ? 'bg-indigo-500 text-white' : 'bg-gray-300 text-gray-800'
-                    } py-2 px-4 mx-1 rounded-md hover:bg-indigo-600`}
-                >
-                    Easy
-                </button>
-                <button
-                    onClick={() => setSelectedDifficulty('medium')}
-                    className={`${
-                        selectedDifficulty === 'medium' ? 'bg-indigo-500 text-white' : 'bg-gray-300 text-gray-800'
-                    } py-2 px-4 mx-1 rounded-md hover-bg-indigo-600`}
-                >
-                    Medium
-                </button>
-                <button
-                    onClick={() => setSelectedDifficulty('hard')}
-                    className={`${
-                        selectedDifficulty === 'hard' ? 'bg-indigo-500 text-white' : 'bg-gray-300 text-gray-800'
-                    } py-2 px-4 mx-1 rounded-md hover:bg-indigo-600`}
-                >
-                    Hard
-                </button>
-            </div>
-
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
-                {allAssignments.map((assignment) => (
-                    <AssignmentCard key={assignment._id} assignment={assignment} />
+                {Object.keys(difficultyLabels).map((level) => (
+                    <button
+                        key={level}
+                        onClick={() => setSelectedDifficulty(level)}
+                        className={`${selectedDifficulty === level ? 'bg-indigo-500 text-white' : 'bg-gray-300 text-gray-800'} py-2 px-4 mx-1 rounded-md hover:bg-indigo-600`}
+                    >
+                        {difficultyLabels[level]}
+                    </button>
                 ))}
             </div>
+
+            {allAssignments.length === 0 ? (
+                <p className="text-center mt-4 text-gray-500">
+                    In {difficultyLabels[selectedDifficulty]} level, no assignment created yet.
+                </p>
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
+                    {allAssignments.map((assignment) => (
+                        <AssignmentCard key={assignment._id} assignment={assignment} onDelete={handleDeleteAssignment} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

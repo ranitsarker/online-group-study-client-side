@@ -2,14 +2,13 @@ import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../providers/AuthProvider';
 
 const AssignmentCard = ({ assignment, onDelete }) => {
     const marks = parseInt(assignment.marks);
     const { user } = useContext(AuthContext);
 
-    // for createdBy validation
     const handleUpdateClick = (event) => {
         if (assignment.createdBy === user.email) {
             // User can update the assignment
@@ -21,23 +20,31 @@ const AssignmentCard = ({ assignment, onDelete }) => {
         }
     };
 
-    const handleDeleteClick = () => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'You are want to delete that assignment?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                onDelete(assignment._id);
-                Swal.fire('Deleted!', 'Your assignment has been deleted.', 'success');
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire('Cancelled', 'Your assignment is safe :)', 'error');
-            }
-        });
+    const handleDeleteClick = (event) => {
+        if (assignment.createdBy === user.email) {
+            // User can delete the assignment
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You want to delete this assignment?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    onDelete(assignment._id);
+                    Swal.fire('Deleted!', 'Your assignment has been deleted.', 'success');
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('Cancelled', 'Your assignment is safe :)', 'error');
+                }
+            });
+        } else {
+            // User is not the creator, show an error message
+            toast.error('Only the creator can delete this assignment');
+            event.preventDefault(); // Prevent the button click action
+        }
     };
+
     return (
         <div className="border border-gray-200 p-4 rounded-md hover:shadow-md">
             <img
