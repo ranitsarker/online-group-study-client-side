@@ -46,7 +46,8 @@ const CreateAssignment = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto">
+        <div className="bg-gray-100 flex items-center justify-center">
+            <div className="bg-white p-8 rounded shadow-md w-96 m-4">
             <h2 className="text-2xl font-semibold mb-4">Create Assignment</h2>
             <form className="space-y-4" onSubmit={handleCreateAssignment}>
                 <div>
@@ -131,6 +132,7 @@ const CreateAssignment = () => {
                 </button>
             </form>
         </div>
+    </div>
     );
 };
 
