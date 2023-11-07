@@ -8,6 +8,16 @@ const CreateAssignment = () => {
     const [dueDate, setDueDate] = useState(null);
     const { user } = useContext(AuthContext);
 
+    const initialFormState = {
+        title: '',
+        description: '',
+        marks: '',
+        difficulty: 'easy',
+        thumbnailUrl: '',
+    };
+
+    const [formData, setFormData] = useState(initialFormState);
+
     const handleCreateAssignment = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
@@ -38,6 +48,9 @@ const CreateAssignment = () => {
             .then((response) => response.json())
             .then(() => {
                 toast.success('Assignment created successfully');
+                // Clear the form input values
+                setDueDate(null);
+                setFormData(initialFormState);
             })
             .catch((error) => {
                 toast.error('An error occurred while creating the assignment');
@@ -58,6 +71,8 @@ const CreateAssignment = () => {
                         type="text"
                         id="title"
                         name="title"
+                        value={formData.title}
+                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         required
                     />
@@ -69,6 +84,8 @@ const CreateAssignment = () => {
                     <textarea
                         id="description"
                         name="description"
+                        value={formData.description}
+                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         required
                     ></textarea>
@@ -81,6 +98,8 @@ const CreateAssignment = () => {
                         type="number"
                         id="marks"
                         name="marks"
+                        value={formData.marks}
+                        onChange={(e) => setFormData({ ...formData, marks: e.target.value })}
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         required
                     />
@@ -92,6 +111,8 @@ const CreateAssignment = () => {
                     <select
                         id="difficulty"
                         name="difficulty"
+                        value={formData.difficulty}
+                        onChange={(e) => setFormData({ ...formData, difficulty: e.target.value })}
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         required
                     >
@@ -120,6 +141,8 @@ const CreateAssignment = () => {
                         type="url"
                         id="thumbnailUrl"
                         name="thumbnailUrl"
+                        value={formData.thumbnailUrl}
+                        onChange={(e) => setFormData({ ...formData, thumbnailUrl: e.target.value })}
                         className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         required
                     />
