@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const GiveMark = () => {
   const { assignmentId } = useParams();
   const [assignmentDetails, setAssignmentDetails] = useState({});
   const [marks, setMarks] = useState('');
   const [feedback, setFeedback] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch assignment details using the assignmentId
@@ -51,6 +53,12 @@ const GiveMark = () => {
   
         if (removeResponse.status === 200) {
           console.log('Assignment removed from submitted collection');
+          toast.success('Assignment has been completed successfully.');
+          // Clear the form fields
+          setMarks('');
+          setFeedback('');
+          navigate('/my-assignment');
+
         } else {
           console.error('Error removing assignment from submitted collection');
         }
@@ -99,8 +107,8 @@ const GiveMark = () => {
           </div>
           <div className="mt-6">
           <button
-              type="button" // Use type="button to prevent form submission
-              onClick={handleSubmit} // Call the function to handle the submission
+              type="button"
+              onClick={handleSubmit}
               className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
             >
               Submit
