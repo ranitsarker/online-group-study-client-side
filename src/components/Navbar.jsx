@@ -36,7 +36,7 @@ const Navbar = () => {
                     )}
                 </div>
                 <div className="hidden group-hover:flex absolute top-12 right-0 flex-col items-start bg-white p-2 rounded shadow">
-                    <span className="text-sm font-medium">{user.email}</span>
+                    <span className="text-sm font-medium">{user.email}</span> {/* Add this line to display the user's email */}
                     <button onClick={handleLogout} className="text-red-500 hover:underline cursor-pointer">
                         Logout
                     </button>
@@ -47,6 +47,7 @@ const Navbar = () => {
 ) : (
     <li><NavLink to='/login'>Login</NavLink></li>
 )}
+
 
         </ul>
     );

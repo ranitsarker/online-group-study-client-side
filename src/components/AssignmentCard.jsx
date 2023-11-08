@@ -21,6 +21,11 @@ const AssignmentCard = ({ assignment, onDelete }) => {
     };
 
     const handleDeleteClick = (event) => {
+        if (!user) {
+            // User is not logged in, redirect to the login page
+            window.location.href = '/login'; // Replace with your actual login URL
+            return;
+        }
         if (assignment.createdBy === user.email) {
             // User can delete the assignment
             Swal.fire({
