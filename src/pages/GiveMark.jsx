@@ -11,7 +11,9 @@ const GiveMark = () => {
 
   useEffect(() => {
     // Fetch assignment details using the assignmentId
-    fetch(`http://localhost:5000/give-mark/${assignmentId}`)
+    fetch(`http://localhost:5000/give-mark/${assignmentId}`, {
+      credentials: "include"
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data) {
