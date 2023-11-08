@@ -51,7 +51,7 @@ const AllAssignments = () => {
                             <AssignmentCard key={assignment._id} assignment={assignment} onDelete={handleDeleteAssignment} />
                         ))}
                     </div>
-                    <div className="flex justify-center mt-4">
+                    <div className="flex justify-center my-4">
                         <nav className="block">
                             <ul className="flex pl-0 rounded list-none flex-wrap">
                                 {currentPage > 1 && (

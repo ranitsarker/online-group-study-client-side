@@ -55,24 +55,33 @@ const AssignmentCard = ({ assignment, onDelete }) => {
             <h3 className="mt-2 text-xl font-semibold">{assignment.title}</h3>
             <p className="mt-2">Marks: {marks}</p>
             <p>Difficulty: {assignment.difficulty}</p>
-            <div className="mt-4 flex space-x-2">
-                <Link to={`/assignment/${assignment._id}`} className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
-                    View Assignment
-                </Link>
-                <Link
-                    to={`/update-assignment/${assignment._id}`}
-                    className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
-                    onClick={handleUpdateClick}
-                >
-                    Update Assignment
-                </Link>
-                <button
-                    onClick={handleDeleteClick}
-                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
-                >
-                    Delete Assignment
-                </button>
+            <div>
+                <div className="border md:inline-block px-4 py-1 font-bold my-2 mx-1">
+                    <Link to={`/assignment/${assignment._id}`} className="">
+                        View
+                    </Link>
+                </div>
+                <div className="border md:inline-block px-4 py-1 font-bold my-2 mx-1">
+                    <Link
+                        to={`/update-assignment/${assignment._id}`}
+                        className=""
+                        onClick={handleUpdateClick}
+                    >
+                        Update
+                    </Link>
+                </div>
+                <div className="border md:inline-block px-4 py-1 font-bold my-2 mx-1">
+                    <Link
+                        onClick={handleDeleteClick}
+                        className=""
+                        >
+                        Delete
+                    </Link>
+                </div>
+
             </div>
+
+
         </div>
     );
 };
