@@ -12,7 +12,9 @@ const SubmittedAssignments = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/submitted-assignment/${user.email}`)
+      fetch(`http://localhost:5000/submitted-assignment/${user.email}`, {
+        credentials: "include"
+      })
         .then((response) => response.json())
         .then((data) => {
           setAssignments(data);

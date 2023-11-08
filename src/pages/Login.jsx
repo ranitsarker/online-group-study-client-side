@@ -22,7 +22,8 @@ const Login = () => {
         // for login
         loginUser(email, password)
             .then((result) => {
-                console.log(result.user);
+                const loggedInUser = result.user;
+                console.log(loggedInUser);
                 toast.success('Successfully logged in.');
                 navigate (location?.state ? location.state : '/');
             })
