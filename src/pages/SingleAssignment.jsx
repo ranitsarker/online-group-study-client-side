@@ -8,7 +8,7 @@ const SingleAssignment = () => {
     const [eachAssignment, setEachAssignment] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/assignment/${id}`, {
+        fetch(`https://online-group-study-server-side.vercel.app/assignment/${id}`, {
             credentials: "include"
         })
             .then((res) => res.json())

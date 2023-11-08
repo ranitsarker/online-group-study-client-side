@@ -12,7 +12,7 @@ const SubmittedAssignments = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/submitted-assignment/${user.email}`, {
+      fetch(`https://online-group-study-server-side.vercel.app/submitted-assignment/${user.email}`, {
         credentials: "include"
       })
         .then((response) => response.json())

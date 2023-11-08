@@ -11,7 +11,7 @@ const MyAssignment = () => {
   useEffect(() => {
     if (user) {
       // Fetch completed assignments for the logged-in user using the new endpoint
-      fetch(`http://localhost:5000/completed-assignments/${user.email}`, {
+      fetch(`https://online-group-study-server-side.vercel.app/completed-assignments/${user.email}`, {
         credentials: "include"
       })
         .then((response) => response.json())
@@ -43,7 +43,7 @@ const MyAssignment = () => {
         setCompletedAssignments(updatedAssignments);
 
         // Send a request to delete the assignment from the database
-        fetch(`http://localhost:5000/delete-assignment/${assignmentId}`, {
+        fetch(`https://online-group-study-server-side.vercel.app/delete-assignment/${assignmentId}`, {
           method: 'DELETE',
         })
           .then((response) => response.json())
