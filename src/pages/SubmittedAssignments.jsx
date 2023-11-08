@@ -67,6 +67,7 @@ const SubmittedAssignments = () => {
                 )}
                 <p className="mt-2 text-gray-600">{assignment.assignmentMarks} Total Marks</p>
                 <p className="mt-2 text-gray-600">Submitted by {assignment.userEmail}</p>
+                <p className="mt-2 text-gray-700">Quick Note: {assignment.quickNote}</p>
                 <p className="mt-2 text-red-600 font-bold">Status: {assignment.status}</p>
                 <button
                   onClick={() => giveMark(assignment._id)}
