@@ -35,6 +35,7 @@ const DifficultyLevelOfAssignment = () => {
     return (
         <div>
             <div className="text-center my-4">
+                <h3 className='text-center text-2xl py-4 mt-4'>Difficulties Levels of Assignment</h3>
                 {Object.keys(difficultyLabels).map((level) => (
                     <button
                         key={level}

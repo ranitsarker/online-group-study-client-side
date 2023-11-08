@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 const Navbar = () => {
     const {user, logOut} = useContext(AuthContext);
 
+
     // logout 
     const handleLogout = () => {
         logOut()
@@ -15,31 +16,38 @@ const Navbar = () => {
         .catch(error => console.log(error))
     }
     const navItems = (
-        <ul className="flex items-center space-x-4">
+        <ul className="lg:flex items-center space-x-4">
             <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/assignments'>Assignments</NavLink></li>
             {user?.email ? (
-                <>
-                    <li><NavLink to='/create-assignment'>Create Assignment</NavLink></li>
-                    <li><NavLink to='/submitted-assignment'>Submitted Assignment</NavLink></li>
-                    <li><NavLink to='/my-assignment'>My Assignment</NavLink></li>
-                    <li>
-                        <div className="flex items-center"> {/* Wrap email and image in a container */}
-                            <span>{user.email}</span> {/* Email */}
-                            {user.photoURL && (
-                                <img
-                                    src={user.photoURL}
-                                    alt="User Profile"
-                                    className="w-8 h-8 rounded-full ml-2" // Apply margin to separate from email
-                                />
-                            )}
-                        </div>
-                    </li>
-                    <li><button onClick={handleLogout}>Logout</button></li>
-                </>
-            ) : (
-                <li><NavLink to='/login'>Login</NavLink></li>
-            )}
+    <>
+        <li><NavLink to='/create-assignment'>Create Assignment</NavLink></li>
+        <li><NavLink to='/submitted-assignment'>Submitted Assignment</NavLink></li>
+        <li><NavLink to='/my-assignment'>My Assignment</NavLink></li>
+        <li>
+            <div className="relative group">
+                <div className="flex items-center">
+                    {user.photoURL && (
+                        <img
+                            src={user.photoURL}
+                            alt="User Profile"
+                            className="w-8 h-8 rounded-full ml-2 group-hover:opacity-80"
+                        />
+                    )}
+                </div>
+                <div className="hidden group-hover:flex absolute top-12 right-0 flex-col items-start bg-white p-2 rounded shadow">
+                    <span className="text-sm font-medium">{user.email}</span>
+                    <button onClick={handleLogout} className="text-red-500 hover:underline cursor-pointer">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </li>
+    </>
+) : (
+    <li><NavLink to='/login'>Login</NavLink></li>
+)}
+
         </ul>
     );
     
