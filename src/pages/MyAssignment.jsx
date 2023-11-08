@@ -11,7 +11,9 @@ const MyAssignment = () => {
   useEffect(() => {
     if (user) {
       // Fetch completed assignments for the logged-in user using the new endpoint
-      fetch(`http://localhost:5000/completed-assignments/${user.email}`)
+      fetch(`http://localhost:5000/completed-assignments/${user.email}`, {
+        credentials: "include"
+      })
         .then((response) => response.json())
         .then((data) => {
           setCompletedAssignments(data);

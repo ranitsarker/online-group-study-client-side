@@ -19,7 +19,6 @@ const SingleAssignment = () => {
     if (!eachAssignment) {
         return <p>Loading...</p>;
     }
-
     return (
         <div className="max-w-full mx-auto p-4">
             <div className="bg-white rounded-lg shadow-lg">
