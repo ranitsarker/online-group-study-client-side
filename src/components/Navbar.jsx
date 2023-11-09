@@ -4,7 +4,13 @@ import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 import logo from "../../public/images/logo.png"
 import { motion } from "framer-motion";
+
 const Navbar = () => {
+    const activeStyle = {
+        color: 'red', // Set the active color here
+        fontWeight: 'bold',
+      };
+
     const {user, logOut} = useContext(AuthContext);
 
 
@@ -22,7 +28,9 @@ const Navbar = () => {
             <li><NavLink to='/assignments'>Assignments</NavLink></li>
             {user?.email ? (
                 <>
-                    <li><NavLink to='/create-assignment'>Create Assignment</NavLink></li>
+                    <li className="listitem"><NavLink to='/create-assignment'
+                    exact activeStyle={activeStyle}
+                    >Create Assignment</NavLink></li>
                     <li><NavLink to='/submitted-assignment'>Submitted Assignment</NavLink></li>
                     <li><NavLink to='/my-assignment'>My Assignment</NavLink></li>
                     <li>

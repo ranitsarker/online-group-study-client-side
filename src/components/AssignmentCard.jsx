@@ -60,26 +60,27 @@ const AssignmentCard = ({ assignment, onDelete }) => {
             <h3 className="mt-2 text-xl font-semibold">{assignment.title}</h3>
             <p className="mt-2">Marks: {marks}</p>
             <p>Difficulty: {assignment.difficulty}</p>
-            <div className='my-3'>
+            <div className='my-3 flex flex-col md:flex-row'>
                 <Link 
                     to={`/assignment/${assignment._id}`} 
-                    className="border md:inline-block px-4 py-1 font-bold my-2 mx-1"
-                    >View
+                    className="border px-4 py-1 font-bold my-2 mx-1"
+                >
+                    View
                 </Link>
                 <Link
                     to={`/update-assignment/${assignment._id}`}
-                    className="border md:inline-block px-4 py-1 font-bold my-2 mx-1"
+                    className="border px-4 py-1 font-bold my-2 mx-1"
                     onClick={handleUpdateClick}
-                >Update
+                >
+                    Update
                 </Link>
                 <Link
                     onClick={handleDeleteClick}
-                    className="border md:inline-block px-4 py-1 font-bold my-2 mx-1"
-                    >Delete
+                    className="border px-4 py-1 font-bold my-2 mx-1"
+                >
+                    Delete
                 </Link>
             </div>
-
-
         </div>
     );
 };
