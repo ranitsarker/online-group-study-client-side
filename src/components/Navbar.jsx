@@ -6,14 +6,7 @@ import logo from "../../public/images/logo.png"
 import { motion } from "framer-motion";
 
 const Navbar = () => {
-    const activeStyle = {
-        color: 'red', // Set the active color here
-        fontWeight: 'bold',
-      };
-
     const {user, logOut} = useContext(AuthContext);
-
-
     // logout 
     const handleLogout = () => {
         logOut()
@@ -24,15 +17,13 @@ const Navbar = () => {
     }
     const navItems = (
         <ul className="lg:flex items-center space-x-4">
-            <li><NavLink to='/'>Home</NavLink></li>
-            <li><NavLink to='/assignments'>Assignments</NavLink></li>
+            <li><NavLink to='/' className={({isActive}) => isActive ? "bg-[#3b82f6] text-white" : ""}>Home</NavLink></li>
+            <li><NavLink to='/assignments' className={({isActive}) => isActive ? "bg-[#3b82f6] text-white" : ""}>Assignments</NavLink></li>
             {user?.email ? (
                 <>
-                    <li className="listitem"><NavLink to='/create-assignment'
-                    exact activeStyle={activeStyle}
-                    >Create Assignment</NavLink></li>
-                    <li><NavLink to='/submitted-assignment'>Submitted Assignment</NavLink></li>
-                    <li><NavLink to='/my-assignment'>My Assignment</NavLink></li>
+                    <li><NavLink to='/create-assignment' className={({isActive}) => isActive ? "bg-[#3b82f6] text-white" : ""}>Create Assignment</NavLink></li>
+                    <li><NavLink to='/submitted-assignment' className={({isActive}) => isActive ? "bg-[#3b82f6] text-white" : ""}>Submitted Assignment</NavLink></li>
+                    <li><NavLink to='/my-assignment' className={({isActive}) => isActive ? "bg-[#3b82f6] text-white" : ""}>My Assignment</NavLink></li>
                     <li>
                         <div className="relative group">
                             <div className="flex items-center">
@@ -46,7 +37,7 @@ const Navbar = () => {
                             </div>
                             <div className="hidden group-hover:flex absolute top-12 right-0 flex-col items-start bg-white p-2 rounded shadow">
                                 <span className="text-sm font-medium">{user.email}</span> {/* Add this line to display the user's email */}
-                                <button onClick={handleLogout} className="text-red-500 hover:underline cursor-pointer">
+                                <button onClick={handleLogout} className="text-[#3b82f6] hover:underline cursor-pointer">
                                     Logout
                                 </button>
                             </div>
