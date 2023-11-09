@@ -4,13 +4,18 @@ import AssignmentCard from '../components/AssignmentCard';
 const AllAssignments = () => {
     const [allAssignments, setAllAssignments] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
+
     const assignmentsPerPage = 4;
 
     useEffect(() => {
         // Fetch data here
         fetch('http://localhost:5000/all-assignment')
             .then((res) => res.json())
-            .then((data) => setAllAssignments(data));
+            .then((data) => {
+                setAllAssignments(data);
+                setIsLoading(false);
+            });
     }, []);
 
     const handleDeleteAssignment = (assignmentId) => {
@@ -42,7 +47,11 @@ const AllAssignments = () => {
 
     return (
         <div>
-            {allAssignments.length === 0 ? (
+            {isLoading ? (
+                <div className="flex items-center justify-center h-screen">
+                    <span className="loading loading-infinity loading-lg"></span>
+                </div>
+            ) : allAssignments.length === 0 ? (
                 <p className='text-center'>No assignment has been created yet.</p>
             ) : (
                 <div>
