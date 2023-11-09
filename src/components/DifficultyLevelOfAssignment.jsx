@@ -13,13 +13,13 @@ const DifficultyLevelOfAssignment = () => {
     };
 
     useEffect(() => {
-        fetch(`https://online-group-study-server-side.vercel.app/all-assignment?difficulty=${selectedDifficulty}`)
+        fetch(`http://localhost:5000/all-assignment?difficulty=${selectedDifficulty}`)
             .then((res) => res.json())
             .then((data) => setAllAssignments(data));
     }, [selectedDifficulty]);
 
     const handleDeleteAssignment = (assignmentId) => {
-        fetch(`https://online-group-study-server-side.vercel.app/assignments/${assignmentId}`, {
+        fetch(`http://localhost:5000/assignments/${assignmentId}`, {
             method: 'DELETE',
         })
             .then((res) => res.json())

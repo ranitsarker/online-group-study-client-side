@@ -72,13 +72,13 @@ const AuthProvider = ({children}) => {
             // token
             if(currentUser){
                 const loginUserEmail = {email: userEmail}
-                axios.post('https://online-group-study-server-side.vercel.app/jwt', loginUserEmail, {withCredentials: true})
+                axios.post('http://localhost:5000/jwt', loginUserEmail, {withCredentials: true})
                 .then(data =>{
                     console.log('token response:', data.data)
                 })
             }
             else{
-                axios.post('https://online-group-study-server-side.vercel.app/logout', loginUserEmail, {
+                axios.post('http://localhost:5000/logout', loginUserEmail, {
                     withCredentials: true
                 })
                 .then(data => {

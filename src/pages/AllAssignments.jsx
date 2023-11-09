@@ -8,14 +8,14 @@ const AllAssignments = () => {
 
     useEffect(() => {
         // Fetch data here
-        fetch('https://online-group-study-server-side.vercel.app/all-assignment')
+        fetch('http://localhost:5000/all-assignment')
             .then((res) => res.json())
             .then((data) => setAllAssignments(data));
     }, []);
 
     const handleDeleteAssignment = (assignmentId) => {
         // Delete assignment and update the state here
-        fetch(`https://online-group-study-server-side.vercel.app/assignments/${assignmentId}`, {
+        fetch(`http://localhost:5000/assignments/${assignmentId}`, {
             method: 'DELETE',
         })
             .then((res) => res.json())
@@ -43,7 +43,7 @@ const AllAssignments = () => {
     return (
         <div>
             {allAssignments.length === 0 ? (
-                <p>No assignment has been created yet.</p>
+                <p className='text-center'>No assignment has been created yet.</p>
             ) : (
                 <div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">

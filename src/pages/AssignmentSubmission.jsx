@@ -47,7 +47,7 @@ const AssignmentSubmission = () => {
     };
 
     // Send the submissionData to server
-    fetch('https://online-group-study-server-side.vercel.app/assignment-submission', {
+    fetch('http://localhost:5000/assignment-submission', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

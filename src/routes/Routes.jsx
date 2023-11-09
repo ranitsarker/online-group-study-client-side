@@ -40,7 +40,7 @@ const allRoutes = createBrowserRouter([
             {
                 path: '/update-assignment/:id',
                 element: <PrivateRoutes><UpdateAssignment></UpdateAssignment></PrivateRoutes>,
-                loader: ({params}) => fetch(`https://online-group-study-server-side.vercel.app/update-assignment/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/update-assignment/${params.id}`),
             },
             {
                 path:'/my-assignment',

@@ -60,30 +60,22 @@ const AssignmentCard = ({ assignment, onDelete }) => {
             <h3 className="mt-2 text-xl font-semibold">{assignment.title}</h3>
             <p className="mt-2">Marks: {marks}</p>
             <p>Difficulty: {assignment.difficulty}</p>
-            <div>
-                <div className="border md:inline-block px-4 py-1 font-bold my-2 mx-1">
-                    <Link to={`/assignment/${assignment._id}`} className="">
-                        View
-                    </Link>
-                </div>
-                <div className="border md:inline-block px-4 py-1 font-bold my-2 mx-1">
-                    <Link
-                        to={`/update-assignment/${assignment._id}`}
-                        className=""
-                        onClick={handleUpdateClick}
-                    >
-                        Update
-                    </Link>
-                </div>
-                <div className="border md:inline-block px-4 py-1 font-bold my-2 mx-1">
-                    <Link
-                        onClick={handleDeleteClick}
-                        className=""
-                        >
-                        Delete
-                    </Link>
-                </div>
-
+            <div className='my-3'>
+                <Link 
+                    to={`/assignment/${assignment._id}`} 
+                    className="border md:inline-block px-4 py-1 font-bold my-2 mx-1">View
+                </Link>
+                <Link
+                    to={`/update-assignment/${assignment._id}`}
+                    className="border md:inline-block px-4 py-1 font-bold my-2 mx-1"
+                    onClick={handleUpdateClick}
+                >Update
+                </Link>
+                <Link
+                    onClick={handleDeleteClick}
+                    className="border md:inline-block px-4 py-1 font-bold my-2 mx-1"
+                    >Delete
+                </Link>
             </div>
 
 

@@ -25,7 +25,7 @@ const UpdateAssignment = () => {
         const assignmentId = loadedAssignment._id;
 
         // Send a request to your server to update the assignment
-        fetch(`https://online-group-study-server-side.vercel.app/update-assignment/${assignmentId}`, {
+        fetch(`http://localhost:5000/update-assignment/${assignmentId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const UpdateAssignment = () => {
     return (
         <div className="max-w-md mx-auto">
             <h2 className="text-2xl font-semibold mb-4">Update Assignment</h2>
-            <form className="space-y-4" onSubmit={handleAssignmentUpdate}>
+            <form className="space-y-4 mx-4" onSubmit={handleAssignmentUpdate}>
                 <div>
                     <label htmlFor="title" className="block text-sm font-medium text-gray-700">
                         Title:

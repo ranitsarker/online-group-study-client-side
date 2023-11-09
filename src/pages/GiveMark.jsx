@@ -11,7 +11,7 @@ const GiveMark = () => {
 
   useEffect(() => {
     // Fetch assignment details using the assignmentId
-    fetch(`https://online-group-study-server-side.vercel.app/give-mark/${assignmentId}`, {
+    fetch(`http://localhost:5000/give-mark/${assignmentId}`, {
       credentials: "include"
     })
       .then((response) => response.json())
@@ -37,7 +37,7 @@ const GiveMark = () => {
   
     try {
       // Send a POST request to update the assignment status
-      const statusResponse = await fetch('https://online-group-study-server-side.vercel.app/complete-assignment', {
+      const statusResponse = await fetch('http://localhost:5000/complete-assignment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const GiveMark = () => {
         console.log('Assignment status updated successfully');
   
         // Send a request to remove the assignment from the 'submitted' collection
-        const removeResponse = await fetch(`https://online-group-study-server-side.vercel.app/remove-submitted-assignment/${assignmentId}`, {
+        const removeResponse = await fetch(`http://localhost:5000/remove-submitted-assignment/${assignmentId}`, {
           method: 'DELETE',
         });
   
