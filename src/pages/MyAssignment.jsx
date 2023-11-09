@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 const MyAssignment = () => {
   const [completedAssignments, setCompletedAssignments] = useState([]);
   const { user } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
@@ -17,9 +18,11 @@ const MyAssignment = () => {
         .then((response) => response.json())
         .then((data) => {
           setCompletedAssignments(data);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.error('Error fetching completed assignments:', error);
+          setIsLoading(false);
         });
     }
   }, [user]);
@@ -43,7 +46,7 @@ const MyAssignment = () => {
         setCompletedAssignments(updatedAssignments);
 
         // Send a request to delete the assignment from the database
-        fetch(`http://localhost:5000/delete-assignment/${assignmentId}`, {
+        fetch(`https://online-group-study-server-side.vercel.app/delete-assignment/${assignmentId}`, {
           method: 'DELETE',
         })
           .then((response) => response.json())
@@ -65,10 +68,14 @@ const MyAssignment = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-10">
+    <div className="py-10">
       <div className="max-w-6xl mx-auto bg-white rounded-md p-4">
         <h1 className="text-2xl font-semibold mb-4">My Completed Assignments</h1>
-        {completedAssignments.length === 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <span className="loading loading-infinity loading-lg"></span>
+          </div>
+        ) : completedAssignments.length === 0 ? (
           <p>No assignments have been completed yet.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">

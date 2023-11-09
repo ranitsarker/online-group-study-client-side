@@ -46,9 +46,11 @@ const SubmittedAssignments = () => {
       <div className="max-w-6xl mx-auto bg-white rounded-md p-4">
         <h1 className="text-2xl font-semibold mb-4">Submitted Assignments</h1>
         {isLoading ? (
-          <p>Loading...</p>
+          <div className="flex items-center justify-center">
+            <span className="loading loading-infinity loading-lg"></span>
+          </div>
         ) : assignments.length === 0 ? (
-          <p>No assignments are pending yet.</p>
+          <p className='text-center my-4'>No assignments are pending yet.</p>
         ) : (
           <div className="grid grid-cols-1 gap-4">
             {assignments.map((assignment) => (
