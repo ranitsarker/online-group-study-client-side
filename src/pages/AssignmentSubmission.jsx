@@ -5,29 +5,16 @@ import { AuthContext } from '../providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
 const AssignmentSubmission = () => {
-    // my custom hook
   const { assignmentDetails } = useAssignment();
-    // for user email 
   const { user } = useContext(AuthContext); 
-
   const [pdfLink, setPdfLink] = useState('');
   const [quickNote, setQuickNote] = useState('');
   const navigate = useNavigate();
 
   const handlePdfLinkChange = (e) => {
     const input = e.target.value;
-    
-    // Regular expression to check if the input is a valid Google Drive PDF link
-    const urlRegex = /^https:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/view(\?usp=sharing)?$/;
-    
-    if (urlRegex.test(input) || input.toLowerCase().endsWith('.pdf')) {
-      setPdfLink(input);
-    } else {
-      toast.error('Please enter a valid Google Drive PDF link or any online PDF link');
-    }
+    setPdfLink(input);
   };
-  
-  
 
   const handleQuickNoteChange = (e) => {
     setQuickNote(e.target.value);
@@ -40,6 +27,7 @@ const AssignmentSubmission = () => {
       toast.error('Please fill in all required fields');
       return;
     }
+
     const submissionData = {
       pdfLink,
       quickNote,
@@ -48,7 +36,6 @@ const AssignmentSubmission = () => {
       assignmentMarks: assignmentDetails.marks,
     };
 
-    // Send the submissionData to server
     fetch('https://online-group-study-server-side.vercel.app/assignment-submission', {
       method: 'POST',
       headers: {
@@ -60,7 +47,6 @@ const AssignmentSubmission = () => {
       .then((data) => {
         console.log(data);
         toast.success('Assignment submitted successfully');
-        // Clear the form fields
         setPdfLink('');
         setQuickNote('');
         navigate('/submitted-assignment');
