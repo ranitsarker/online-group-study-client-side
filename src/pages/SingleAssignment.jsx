@@ -11,20 +11,34 @@ const SingleAssignment = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        fetch(`https://online-group-study-server-side.vercel.app/assignment/${id}`, {
-            credentials: "include"
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setEachAssignment(data);
-                setAssignmentDetails({ title: data.title, marks: data.marks });
-                setIsLoading(false); 
-            })
-            .catch((error) => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`https://online-group-study-server-side.vercel.app/assignment/${id}`, {
+                    credentials: "include"
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Failed to fetch assignment');
+                }
+    
+                const data = await response.json();
+    
+                // Check if the fetched assignment ID matches the current id parameter
+                if (data._id === id) {
+                    setEachAssignment(data);
+                    setAssignmentDetails({ title: data.title, marks: data.marks });
+                }
+                
+                setIsLoading(false);
+            } catch (error) {
                 console.error('Error fetching assignment:', error);
                 setIsLoading(false);
-            });
+            }
+        };
+    
+        fetchData();
     }, [id, setAssignmentDetails]);
+    
 
     if (isLoading) {
         return (

@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import toast from 'react-hot-toast';
 import { useAssignment } from '../providers/AssignmentProvider'; 
 import { AuthContext } from '../providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const AssignmentSubmission = () => {
     // my custom hook
@@ -11,6 +12,7 @@ const AssignmentSubmission = () => {
 
   const [pdfLink, setPdfLink] = useState('');
   const [quickNote, setQuickNote] = useState('');
+  const navigate = useNavigate();
 
   const handlePdfLinkChange = (e) => {
     const input = e.target.value;
@@ -61,6 +63,7 @@ const AssignmentSubmission = () => {
         // Clear the form fields
         setPdfLink('');
         setQuickNote('');
+        navigate('/submitted-assignment');
       })
       .catch((error) => {
         toast.error('Failed to submit assignment');

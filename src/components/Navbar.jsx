@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
-import logo from "../../public/images/logo.png"
+import logo from "/images/logo.png"
 import { motion } from "framer-motion";
 
 const Navbar = () => {
