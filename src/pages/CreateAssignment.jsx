@@ -59,8 +59,7 @@ const CreateAssignment = () => {
     };
 
     return (
-        <div className="bg-gray-100 flex items-center justify-center">
-            <div className="bg-white p-8 rounded shadow-md w-96 m-4">
+        <div className="max-w-md mx-auto p-4">
             <h2 className="text-2xl font-semibold mb-4">Create Assignment</h2>
             <form className="space-y-4" onSubmit={handleCreateAssignment}>
                 <div>
@@ -149,12 +148,11 @@ const CreateAssignment = () => {
                 </div>
                 <button
                     type="submit"
-                    className="mt-4 bg-indigo-600 text-white font-semibold px-4 py-2 rounded-full hover-bg-indigo-700"
+                    className="w-full bg-blue-500 text-white py-2 rounded-md hover-bg-blue-600"
                 >
                     Create Assignment
                 </button>
             </form>
-        </div>
     </div>
     );
 };

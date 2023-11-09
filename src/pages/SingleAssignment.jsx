@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAssignment } from "../providers/AssignmentProvider";
+import { motion } from "framer-motion";
 
 const SingleAssignment = () => {
     const { setAssignmentDetails } = useAssignment();
     const { id } = useParams();
     const [eachAssignment, setEachAssignment] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(() => {
         fetch(`http://localhost:5000/assignment/${id}`, {
@@ -15,8 +18,21 @@ const SingleAssignment = () => {
             .then((data) => {
                 setEachAssignment(data);
                 setAssignmentDetails({ title: data.title, marks: data.marks });
+                setIsLoading(false); 
+            })
+            .catch((error) => {
+                console.error('Error fetching assignment:', error);
+                setIsLoading(false);
             });
     }, [id, setAssignmentDetails]);
+
+    if (isLoading) {
+        return (
+            <div className="max-w-full mx-auto p-4 flex justify-center items-center">
+                <span className="loading loading-infinity loading-lg"></span>
+            </div>
+        );
+    }
 
     if (!eachAssignment) {
         return <p>Loading...</p>;
@@ -36,9 +52,15 @@ const SingleAssignment = () => {
                     <p className="text-gray-700 mb-2">Difficulty: {eachAssignment.difficulty}</p>
                     <p className="text-gray-700 mb-2">Due Date: {eachAssignment.dueDate}</p>
                     <p className="text-gray-700 mb-2">Created By: {eachAssignment.createdBy}</p>
-                    <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
+                    <motion.button className="bg-blue-500 text-white px-4 py-2 rounded-md hover-bg-blue-700"
+                      whileHover={{
+                        scale: 1.2,
+                        transition: { duration: 1 },
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                    >
                         <Link to="/assignment-submission" className="text-white">Take Assignment</Link>
-                    </button>
+                    </motion.button>
                 </div>
             </div>
         </div>

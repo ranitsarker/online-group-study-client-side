@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 import logo from "../../public/images/logo.png"
-
+import { motion } from "framer-motion";
 const Navbar = () => {
     const {user, logOut} = useContext(AuthContext);
 
@@ -62,7 +62,11 @@ const Navbar = () => {
                         {navItems}
                     </ul>
                     </div>
-                    <img src={logo} alt="Online Study Group" className="w-32 h-auto" />
+                    <motion.img src={logo} alt="Online Study Group" className="w-32 h-auto"
+                    initial={{ y: -200}}                    
+                    animate={{ y: -10}}  
+                    transition={{delay: 0.2, type: 'tween'}}                  
+                    />
 
                 </div>
                 <div className="navbar-center hidden lg:flex">

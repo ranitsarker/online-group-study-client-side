@@ -42,7 +42,7 @@ const SubmittedAssignments = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-10">
+    <div className="py-10">
       <div className="max-w-6xl mx-auto bg-white rounded-md p-4">
         <h1 className="text-2xl font-semibold mb-4">Submitted Assignments</h1>
         {isLoading ? (

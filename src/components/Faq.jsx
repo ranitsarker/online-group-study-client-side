@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 const Faq = () => {
   const faqItems = [
     {
@@ -59,12 +58,14 @@ const Faq = () => {
     <div className="bg-white py-12">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-800 mb-8">Frequently Asked Questions</h2>
-        <div className="space-y-4">
+        <div className="space-y-4 mx-4">
+          
           {faqItems.map((item, index) => (
             <div key={index}>
               <button
                 className="flex justify-between w-full py-2 px-4 text-left bg-gray-200 hover:bg-gray-300 focus:outline-none focus:bg-gray-300"
-                onClick={() => toggleItem(index)}
+                onClick={() => toggleItem(index)
+                }
               >
                 <span className="font-medium">{item.question}</span>
                 <span>{openItem === index ? '−' : '+'}</span>

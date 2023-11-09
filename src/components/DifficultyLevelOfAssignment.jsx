@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import AssignmentCard from '../components/AssignmentCard';
+import { motion } from "framer-motion";
 
 const DifficultyLevelOfAssignment = () => {
     const [allAssignments, setAllAssignments] = useState([]);
@@ -37,13 +38,19 @@ const DifficultyLevelOfAssignment = () => {
             <div className="text-center my-4">
                 <h3 className='text-center text-2xl py-4 mt-4'>Difficulties Levels of Assignment</h3>
                 {Object.keys(difficultyLabels).map((level) => (
-                    <button
+                    <motion.button
                         key={level}
                         onClick={() => setSelectedDifficulty(level)}
-                        className={`${selectedDifficulty === level ? 'bg-indigo-500 text-white' : 'bg-gray-300 text-gray-800'} py-2 px-4 mx-1 rounded-md hover:bg-indigo-600`}
+                        className={`${selectedDifficulty === level ? '' : ''} py-2 px-4 mx-1 rounded-md `}
+
+                        whileHover={{
+                            scale: 1.1,
+                            textShadow: "0px 0px 8px rgb(225, 225, 225)",
+                            boxShadow: "0px 0px 8px rgb(225, 225, 225)",
+                        }}
                     >
                         {difficultyLabels[level]}
-                    </button>
+                    </motion.button>
                 ))}
             </div>
 

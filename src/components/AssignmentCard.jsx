@@ -63,7 +63,8 @@ const AssignmentCard = ({ assignment, onDelete }) => {
             <div className='my-3'>
                 <Link 
                     to={`/assignment/${assignment._id}`} 
-                    className="border md:inline-block px-4 py-1 font-bold my-2 mx-1">View
+                    className="border md:inline-block px-4 py-1 font-bold my-2 mx-1"
+                    >View
                 </Link>
                 <Link
                     to={`/update-assignment/${assignment._id}`}
