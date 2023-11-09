@@ -19,7 +19,7 @@ const DifficultyLevelOfAssignment = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`http://localhost:5000/all-assignment?difficulty=${selectedDifficulty}`)
+    fetch(`https://online-group-study-server-side.vercel.app/all-assignment?difficulty=${selectedDifficulty}`)
       .then((res) => res.json())
       .then((data) => {
         setAllAssignments(data);
@@ -28,7 +28,7 @@ const DifficultyLevelOfAssignment = () => {
   }, [selectedDifficulty]);
 
   const handleDeleteAssignment = (assignmentId) => {
-    fetch(`http://localhost:5000/assignments/${assignmentId}`, {
+    fetch(`https://online-group-study-server-side.vercel.app/assignments/${assignmentId}`, {
       method: 'DELETE',
     })
       .then((res) => res.json())
@@ -87,7 +87,10 @@ const DifficultyLevelOfAssignment = () => {
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
             {currentAssignments.map((assignment) => (
-              <AssignmentCard key={assignment._id} assignment={assignment} onDelete={handleDeleteAssignment} />
+              <AssignmentCard 
+              key={assignment._id} 
+              assignment={{...assignment, marks:parseInt(assignment.marks)}} 
+              onDelete={handleDeleteAssignment} />
             ))}
           </div>
           <div className="flex justify-center my-4">

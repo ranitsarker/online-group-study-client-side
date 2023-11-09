@@ -10,22 +10,22 @@ const Banner = () => {
                 <motion.h1 className="text-4xl font-bold text-white leading-tight"
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
-                    transition={{delay: 1.4, duration: 1.4}}
+                    transition={{delay: 1.1, duration: 1.1}}
                 >Online Group Study Platform</motion.h1>
                 <motion.p className="text-lg text-white mt-2 mb-6"
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
-                    transition={{delay: 1.5, duration: 1.5}}
+                    transition={{delay: 1.2, duration: 1.2}}
                 >Empower your learning experience with our comprehensive online group study platform. Collaborate effectively, create and manage assignments, and engage with a diverse user community. Join us to unlock a world of shared knowledge and academic success.</motion.p>
                 <motion.h2 className="text-2xl font-semibold text-white mb-4"
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
-                    transition={{delay: 1.6, duration: 1.6}}
+                    transition={{delay: 1.3, duration: 1.3}}
                 >Key Features</motion.h2>
                 <motion.ul className="list-disc ml-6 text-white"
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
-                    transition={{delay: 1.7, duration: 1.7}}
+                    transition={{delay: 1.4, duration: 1.4}}
                 >
                     <li className="mb-2">Easy User Registration</li>
                     <li className="mb-2">Efficient Assignment Management</li>

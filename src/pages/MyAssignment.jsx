@@ -12,7 +12,7 @@ const MyAssignment = () => {
   useEffect(() => {
     if (user) {
       // Fetch completed assignments for the logged-in user using the new endpoint
-      fetch(`http://localhost:5000/completed-assignments/${user.email}`, {
+      fetch(`https://online-group-study-server-side.vercel.app/completed-assignments/${user.email}`, {
         credentials: "include"
       })
         .then((response) => response.json())
@@ -76,7 +76,7 @@ const MyAssignment = () => {
             <span className="loading loading-infinity loading-lg"></span>
           </div>
         ) : completedAssignments.length === 0 ? (
-          <p>No assignments have been completed yet.</p>
+          <p className='text-center my-4'>No assignments have been completed yet.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
             {completedAssignments.map((assignment) => (

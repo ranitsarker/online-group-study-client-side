@@ -30,7 +30,7 @@ const CreateAssignment = () => {
         // Ensure dueDate is in the desired format for the server
         const formattedDueDate = dueDate ? dueDate.toISOString().split('T')[0] : null;
 
-        fetch('http://localhost:5000/create-assignment', {
+        fetch('https://online-group-study-server-side.vercel.app/create-assignment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

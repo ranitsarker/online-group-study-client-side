@@ -10,7 +10,7 @@ const AllAssignments = () => {
 
     useEffect(() => {
         // Fetch data here
-        fetch('http://localhost:5000/all-assignment')
+        fetch('https://online-group-study-server-side.vercel.app/all-assignment')
             .then((res) => res.json())
             .then((data) => {
                 setAllAssignments(data);
@@ -20,7 +20,7 @@ const AllAssignments = () => {
 
     const handleDeleteAssignment = (assignmentId) => {
         // Delete assignment and update the state here
-        fetch(`http://localhost:5000/assignments/${assignmentId}`, {
+        fetch(`https://online-group-study-server-side.vercel.app/assignments/${assignmentId}`, {
             method: 'DELETE',
         })
             .then((res) => res.json())

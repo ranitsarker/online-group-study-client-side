@@ -11,7 +11,7 @@ const GiveMark = () => {
 
   useEffect(() => {
     // Fetch assignment details using the assignmentId
-    fetch(`http://localhost:5000/give-mark/${assignmentId}`, {
+    fetch(`https://online-group-study-server-side.vercel.app/give-mark/${assignmentId}`, {
       credentials: "include"
     })
       .then((response) => response.json())
@@ -37,7 +37,7 @@ const GiveMark = () => {
   
     try {
       // Send a POST request to update the assignment status
-      const statusResponse = await fetch('http://localhost:5000/complete-assignment', {
+      const statusResponse = await fetch('https://online-group-study-server-side.vercel.app/complete-assignment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const GiveMark = () => {
         console.log('Assignment status updated successfully');
   
         // Send a request to remove the assignment from the 'submitted' collection
-        const removeResponse = await fetch(`http://localhost:5000/remove-submitted-assignment/${assignmentId}`, {
+        const removeResponse = await fetch(`https://online-group-study-server-side.vercel.app/remove-submitted-assignment/${assignmentId}`, {
           method: 'DELETE',
         });
   
@@ -73,17 +73,18 @@ const GiveMark = () => {
   };
   
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="max-w-full p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto p-4">
         <h1 className="text-2xl font-semibold mb-4">Give Marks</h1>
         <div>
           <p>Assignment Title: {assignmentDetails.assignmentTitle}</p>
           <p>Examinee Name: {assignmentDetails.userEmail}</p>
-          <p>PDF Link: {assignmentDetails.pdfLink}</p>
+          <div className='className="overflow-hidden md:max-h-32"'>
+            <p>PDF Link: {assignmentDetails.pdfLink}</p>
+          </div>
           <p>Quick Note: {assignmentDetails.quickNote}</p>
           <p>Total Marks: {assignmentDetails.assignmentMarks}</p>
         </div>
-        <form>
+        <form className="space-y-4">
           <div className="mt-4">
             <label htmlFor="marks" className="block text-sm font-medium text-gray-700">
               Marks:
@@ -117,7 +118,6 @@ const GiveMark = () => {
             </button>
           </div>
         </form>
-      </div>
     </div>
   );
 };

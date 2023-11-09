@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 import logo from "../../public/images/logo.png"
@@ -37,7 +37,7 @@ const Navbar = () => {
                             </div>
                             <div className="hidden group-hover:flex absolute top-12 right-0 flex-col items-start bg-white p-2 rounded shadow">
                                 <span className="text-sm font-medium">{user.email}</span> {/* Add this line to display the user's email */}
-                                <button onClick={handleLogout} className="text-[#3b82f6] hover:underline cursor-pointer">
+                                <button onClick={handleLogout} className={({isActive}) => isActive ? "bg-[#3b82f6] text-white" : "" }>
                                     Logout
                                 </button>
                             </div>
@@ -45,7 +45,7 @@ const Navbar = () => {
                     </li>
                 </>
             ) : (
-                <li><NavLink to='/login'>Login</NavLink></li>
+                <li><NavLink to='/login' className={({isActive}) => isActive ? "bg-[#3b82f6] text-white" : ""}>Login</NavLink></li>
             )}
         </ul>
     );
@@ -61,11 +61,16 @@ const Navbar = () => {
                         {navItems}
                     </ul>
                     </div>
-                    <motion.img src={logo} alt="Online Study Group" className="w-32 h-auto"
-                    initial={{ y: -200}}                    
-                    animate={{ y: -10}}  
-                    transition={{delay: 0.2, type: 'tween'}}                  
-                    />
+                    <Link to="/">
+                        <motion.img
+                            src={logo}
+                            alt="Online Study Group"
+                            className="w-32 h-auto"
+                            initial={{ y: -200 }}
+                            animate={{ y: -10 }}
+                            transition={{ delay: 0.2, type: 'tween' }}
+                        />
+                    </Link>
 
                 </div>
                 <div className="navbar-center hidden lg:flex">

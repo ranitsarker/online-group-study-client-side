@@ -8,6 +8,7 @@ const Footer = () => {
                     <Link to='/' className="link link-hover">Home</Link> 
                     <Link to='/assignments'>Assignments</Link>
                 </nav> 
+                <p>Email us: <a href="mailto:rntprince@gmail.com">rntprince@gmail.com</a></p>
                 <aside>
                     <p>Copyright © 2023 - All right reserved by Online Group Study</p>
                 </aside>
