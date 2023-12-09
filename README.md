@@ -67,4 +67,4 @@ JWT verifyToken generates when login and when the user logout that token is remo
 
 I have a total of 57 commits. I have tried to give all those them are meaning full. 
 
-### Live URL: https://online-group-study-be2ef.web.app/
+### Live URL: https://unequal-able.surge.sh
